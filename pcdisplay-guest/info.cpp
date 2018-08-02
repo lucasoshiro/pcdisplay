@@ -22,7 +22,7 @@ char REQUEST_COMMANDS[][8] = {"CPU",
 void info_init () {
     INFO.cpu_usage    = 0;
     INFO.volume       = 0;
-    INFO.temp         = 0;
+    INFO.temp         = 21;
     INFO.ram_used     = 0; INFO.ram_total      = 1;
     INFO.net_up_speed = 0; INFO.net_down_speed = 0;
     INFO.day          = 0; INFO.month          = 0; INFO.year         = 0;

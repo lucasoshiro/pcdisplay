@@ -15,11 +15,9 @@ int read_serial () {
     char *c;
     unsigned long begin = millis ();
 
-    // if (Serial.available () <= 0) return 1;
-
     for (c = serial_buffer; ; c++) {
         while (Serial.available () <= 0) {
-            if (millis () - begin > 100) return 1;
+            if (millis () - begin > 1000) return 1;
         }
         
         *c = Serial.read ();
@@ -37,7 +35,7 @@ void try_wait_connection () {
 
     do {
         Serial.println ("HELLO");
-        disconnected = read_serial ();
+        disconnected = read_serial () && !IS_HELLO (serial_buffer);
         delay (100);
     } while (disconnected);
 }
@@ -67,12 +65,12 @@ void loop () {
     try_wait_connection ();
     Serial.println ("NAME");
     parse (serial_buffer);
-    Serial.println ("INFO");
+    Serial.println ("SYSINFO");
     parse (serial_buffer);
     current_state = 0;
 
     for (;;) {
-        // Serial.println ("MEDIA");
+        // Serial.println ("TIME");
 
         // if (!read_serial ()) 
         //     parse (serial_buffer);
@@ -89,9 +87,10 @@ void loop () {
         // read_serial ();
         // delay (20);
 
-        Serial.println ("CPU");
+        Serial.println ("NET");
         if (!read_serial ()) parse (serial_buffer);
-        draw_cpu (lcd);
+        draw_net (lcd);
+
         delay (100);
     }
 }

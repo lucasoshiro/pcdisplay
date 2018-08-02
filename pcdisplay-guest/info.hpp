@@ -1,6 +1,8 @@
 #ifndef _INFO
 #define _INFO
 
+#define IS_HELLO(s) (strcmp (s, "HELLO") == 0)
+
 struct info_t {
     int  cpu_usage;
     int  volume;
@@ -17,7 +19,9 @@ struct info_t {
 extern info_t INFO;
 
 void info_init ();
+
 void parse (char *s);
+
 void print_pretty();
 
 #endif

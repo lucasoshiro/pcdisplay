@@ -2,7 +2,6 @@ load 'arduino_serial.rb'
 require 'byebug'
 
 $rules = {}
-$mutex = Mutex.new
 $interval = 0.1
 $arduino = Arduino.new nil, nil
 $verbose = false
@@ -12,9 +11,7 @@ def verbose v
 end
 
 def request request_name, &block
-  $mutex.synchronize do
-    $rules[request_name] = lambda(&block)
-  end
+  $rules[request_name] = lambda(&block)
 end
 
 def parse_and_execute raw_string
@@ -40,19 +37,17 @@ def send_string s
   if $verbose then puts "SENT #{s}" end
 end
 
-$server_thread = Thread.new do
+def serve
   loop do
     raw_string = receive_string
 
     unless raw_string.nil?
-      $mutex.synchronize do
-        response = parse_and_execute raw_string
+      response = parse_and_execute raw_string
 
-        if response.nil?
-          send_string 'NULL'
-        else
-          send_string response
-        end
+      if response.nil?
+        send_string 'NULL'
+      else
+        send_string response
       end
     end
     
@@ -60,6 +55,7 @@ $server_thread = Thread.new do
   end
 end
 
+
 at_exit do
-  $server_thread.join
+  serve
 end

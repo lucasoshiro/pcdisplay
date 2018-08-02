@@ -6,4 +6,7 @@
 void print_center (LiquidCrystal lcd, int l, char *s);
 
 void draw_percent (LiquidCrystal lcd, int line, int percent);
+
+void clear_line_section (LiquidCrystal lcd, int line, int begin, int end);
+
 #endif

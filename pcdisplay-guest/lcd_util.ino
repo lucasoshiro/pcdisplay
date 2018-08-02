@@ -24,3 +24,8 @@ void draw_percent (LiquidCrystal lcd, int line, int percent) {
         lcd.write (byte (3));
     }
 }
+
+void clear_line_section (LiquidCrystal lcd, int line, int index, int end) {
+    lcd.setCursor (index, line);
+    for (int i = index; i < end; i++) lcd.write (' ');
+}
