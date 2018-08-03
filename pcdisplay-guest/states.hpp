@@ -4,7 +4,7 @@
 
 enum state_t {SYSINFO, TIME, CPU, RAM, TEMP, NET, MEDIA};
 
-extern void (*draw[7]) ();
+extern void (*draw[7]) (LiquidCrystal lcd);
 
 void draw_sysinfo (LiquidCrystal lcd);
 

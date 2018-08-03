@@ -4,13 +4,13 @@
 #include <string.h>
 #include <math.h>
 
-void (*draw[7]) () = {draw_sysinfo,
-                      draw_time,
-                      draw_cpu,
-                      draw_ram,
-                      draw_temp,
-                      draw_net,
-                      draw_media};
+void (*draw[7]) (LiquidCrystal lcd) = {draw_sysinfo,
+                                       draw_time,
+                                       draw_cpu,
+                                       draw_ram,
+                                       draw_temp,
+                                       draw_net,
+                                       draw_media};
 
 void draw_sysinfo (LiquidCrystal lcd) {
     lcd.setCursor (0, 0);
@@ -19,7 +19,6 @@ void draw_sysinfo (LiquidCrystal lcd) {
     lcd.setCursor (0, 1);
     lcd.print (INFO.sys_info);
     clear_line_section (lcd, 1, strlen (INFO.sys_info), 17);
-        
 }
 
 void draw_time (LiquidCrystal lcd) {
@@ -63,14 +62,16 @@ void draw_ram (LiquidCrystal lcd) {
 void draw_temp (LiquidCrystal lcd) {
     char line[17];
 
-    sprintf (line, "CPU Temp: %d C", INFO.temp);
+    sprintf (line, "CPU Temp: %d %cC", INFO.temp, 4);
 
     lcd.setCursor (0, 0);
     lcd.print (line);
     clear_line_section (lcd, 0, strlen (line), 17);
+    clear_line_section (lcd, 1, 0, 17);
 }
 
 void draw_net (LiquidCrystal lcd) {
+    
 }
 
 void draw_media (LiquidCrystal lcd) {

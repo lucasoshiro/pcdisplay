@@ -10,6 +10,7 @@ LiquidCrystal lcd (12, 11, 6, 5, 4, 3);
 char serial_buffer[512];
 state_t current_state;
 int received_last_request;
+int change_screen = 0;
 
 int read_serial () {
     char *c;
@@ -35,9 +36,13 @@ void try_wait_connection () {
 
     do {
         Serial.println ("HELLO");
-        disconnected = read_serial () && !IS_HELLO (serial_buffer);
+        disconnected = read_serial ();// && !IS_HELLO (serial_buffer);
         delay (100);
     } while (disconnected);
+}
+
+void schedule_screen_change () {
+    change_screen = 1;
 }
 
 void setup () {
@@ -50,6 +55,10 @@ void setup () {
     lcd.createChar (4, charDegrees);
     
     pinMode (13, OUTPUT);
+    pinMode (2, INPUT);
+
+    attachInterrupt (digitalPinToInterrupt (2), schedule_screen_change, RISING);
+
     digitalWrite (13, LOW);
     lcd.begin (16, 2);
     delay (500);
@@ -63,34 +72,25 @@ void setup () {
 
 void loop () {
     try_wait_connection ();
+    
     Serial.println ("NAME");
+    read_serial ();
     parse (serial_buffer);
+    
     Serial.println ("SYSINFO");
+    read_serial ();
     parse (serial_buffer);
+    
     current_state = 0;
 
     for (;;) {
-        // Serial.println ("TIME");
+        if (change_screen) {
+            current_state = (current_state + 1) % 5;
+            delay (100);
+            change_screen = 0;
+        }
 
-        // if (!read_serial ()) 
-        //     parse (serial_buffer);
-
-        // lcd.clear ();
-        // lcd.setCursor (0, 0);
-        // lcd.print (INFO.media_title);
-        // lcd.setCursor (0, 1);
-        // lcd.print (INFO.media_artist);
-
-        // int v = (unsigned long) analogRead (A0) * 100 / 1024;
-        // sprintf (serial_buffer, "VOLUME %d", v);
-        // Serial.println (serial_buffer);
-        // read_serial ();
-        // delay (20);
-
-        Serial.println ("NET");
-        if (!read_serial ()) parse (serial_buffer);
-        draw_net (lcd);
-
-        delay (100);
+        draw[current_state] (lcd);
+        delay (500);
     }
 }
