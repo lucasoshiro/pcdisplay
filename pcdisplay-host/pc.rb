@@ -113,7 +113,7 @@ class PC
   end
 
   def refresh_ram
-    free = `free`.lines.map{|line| line.split}
+    free = `free --mebi`.lines.map{|line| line.split}
     @ram_info = {
       totalMem: free[1][1],
       usedMem:  free[1][2],

@@ -26,7 +26,8 @@ request 'RAM' do
 end
 
 request 'NAME' do
-  "NAME #{PC.instance.pc_name}"
+  name = Shellwords.escape PC.instance.pc_name
+  "NAME #{name}"
 end
 
 request 'NET' do
@@ -61,7 +62,7 @@ request 'TEMP' do
 end
 
 request 'SYSINFO' do
-  name = PC.instance.sys_info[:NAME]
+  name = Shellwords.escape PC.instance.sys_info[:NAME]
   "SYSINFO #{name}"
 end
 

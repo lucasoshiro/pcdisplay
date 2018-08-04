@@ -15,7 +15,11 @@ def request request_name, &block
 end
 
 def parse_and_execute raw_string
-  splitted = raw_string.split
+  begin
+    splitted = raw_string.split
+  rescue ArgumentError
+    return nil
+  end
   command = splitted[0]
   args = splitted[1..-1]
 

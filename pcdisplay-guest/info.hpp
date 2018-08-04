@@ -17,6 +17,7 @@ struct info_t {
 };
 
 extern info_t INFO;
+extern char REQUEST_COMMANDS[][8];
 
 void info_init ();
 

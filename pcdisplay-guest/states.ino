@@ -49,9 +49,21 @@ void draw_cpu (LiquidCrystal lcd) {
 
 void draw_ram (LiquidCrystal lcd) {
     char line[17];
-    sprintf (line, "RAM: %.2f/%.2f GB",
-             (double) INFO.ram_used / (1 << 30),
-             (double) INFO.ram_total / (1 << 30));
+    char used_str[8], total_str[8];
+
+    float used_gb  = (float) INFO.ram_used  / (1 << 10);
+    float total_gb = (float) INFO.ram_total / (1 << 10);
+
+    int used_int  = used_gb,  used_dec  = round((used_gb - used_int)   * 10);
+    int total_int = total_gb, total_dec = round((total_gb - total_int) * 10);
+
+    if (used_int < 10) sprintf (used_str, "%d.%d", used_int, used_dec);
+    else sprintf (used_str, "%d", used_int);
+
+    if (total_int < 10) sprintf (total_str, "%d.%d", total_int, total_dec);
+    else sprintf (total_str, "%d", total_int);
+
+    sprintf (line, "RAM: %s/%s GB", used_str, total_str);
 
     lcd.setCursor (0, 0);
     lcd.print (line);

@@ -1,0 +1,381 @@
+Picked up JAVA_TOOL_OPTIONS: 
+Archiving built core (caching) in: /tmp/arduino_cache_418447/core/core_arduino_avr_uno_efc5e07fa0d729e21ca56f122d353734.a
+O sketch usa 11456 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_recv(): programmer is not responding
+O sketch usa 11456 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Problema ao carregar para a placa. Veja http://www.arduino.cc/en/Guide/Troubleshooting#upload para sugestões.
+O sketch usa 11588 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 8360 bytes (25%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1308 bytes (63%) de memória dinâmica, deixando 740 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_getsync() attempt 1 of 10: not in sync: resp=0x4e
+avrdude: stk500_getsync() attempt 2 of 10: not in sync: resp=0x41
+avrdude: stk500_getsync() attempt 3 of 10: not in sync: resp=0x4d
+avrdude: stk500_getsync() attempt 4 of 10: not in sync: resp=0x45
+avrdude: stk500_getsync() attempt 5 of 10: not in sync: resp=0x0d
+avrdude: stk500_getsync() attempt 6 of 10: not in sync: resp=0x0a
+avrdude: stk500_getsync() attempt 7 of 10: not in sync: resp=0x43
+avrdude: stk500_getsync() attempt 8 of 10: not in sync: resp=0x50
+avrdude: stk500_getsync() attempt 9 of 10: not in sync: resp=0x55
+avrdude: stk500_getsync() attempt 10 of 10: not in sync: resp=0x0d
+Ocorreu um erro enquanto o sketch era carregado
+O sketch usa 8360 bytes (25%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1308 bytes (63%) de memória dinâmica, deixando 740 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 8360 bytes (25%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1308 bytes (63%) de memória dinâmica, deixando 740 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_getsync() attempt 1 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 2 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 3 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 4 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 5 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 6 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 7 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 8 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 9 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 10 of 10: not in sync: resp=0x00
+Ocorreu um erro enquanto o sketch era carregado
+O sketch usa 8360 bytes (25%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1308 bytes (63%) de memória dinâmica, deixando 740 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 8360 bytes (25%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1308 bytes (63%) de memória dinâmica, deixando 740 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11588 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11588 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11552 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_recv(): programmer is not responding
+avrdude: stk500_recv(): programmer is not responding
+avrdude: stk500_recv(): programmer is not responding
+O sketch usa 11552 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Problema ao carregar para a placa. Veja http://www.arduino.cc/en/Guide/Troubleshooting#upload para sugestões.
+O sketch usa 11552 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Ocorreu um erro enquanto o sketch era carregado
+
+
+
+
+
+
+
+
+
+
+O sketch usa 11552 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11552 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Ocorreu um erro enquanto o sketch era carregado
+O sketch usa 11552 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Ocorreu um erro enquanto o sketch era carregado
+
+** (java:2704): WARNING **: 19:19:40.426: Invalid borders specified for theme pixmap:
+        /usr/share/themes/Maia/gtk-2.0/../assets/line-h.png,
+borders don't fit within the image
+
+** (java:2704): WARNING **: 19:19:40.426: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:19:40.426: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:19:40.426: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:19:40.426: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:19:47.523: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:19:47.523: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:19:47.523: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:19:47.523: invalid source position for vertical gradient
+
+
+
+
+
+
+
+
+
+
+Opções de compilação alteradas, recompilando tudo
+Archiving built core (caching) in: /tmp/arduino_cache_418447/core/core_arduino_avr_esplora_efc5e07fa0d729e21ca56f122d353734.a
+O sketch usa 13998 bytes (48%) de espaço de armazenamento para programas. O máximo são 28672 bytes.
+Variáveis globais usam 1369 bytes (53%) de memória dinâmica, deixando 1191 bytes para variáveis locais. O máximo são 2560 bytes.
+Opções de compilação alteradas, recompilando tudo
+O sketch usa 11552 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11574 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_recv(): programmer is not responding
+
+
+
+
+
+
+
+
+
+
+O sketch usa 11574 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_recv(): programmer is not responding
+avr_read(): error reading address 0x0000
+    read operation not supported for memory "flash"
+avrdude: failed to read all of flash memory, rc=-2
+O sketch usa 11574 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+a porta serial avrdude: failed to read all of flash memory, rc=-2
+ selecionada não existe ou sua placa não está conectada
+O sketch usa 11574 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Ocorreu um erro enquanto o sketch era carregado
+O sketch usa 11574 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Ocorreu um erro enquanto o sketch era carregado
+O sketch usa 11574 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+Ocorreu um erro enquanto o sketch era carregado
+
+
+
+
+
+
+
+
+
+
+Opções de compilação alteradas, recompilando tudo
+O sketch usa 14020 bytes (48%) de espaço de armazenamento para programas. O máximo são 28672 bytes.
+Variáveis globais usam 1369 bytes (53%) de memória dinâmica, deixando 1191 bytes para variáveis locais. O máximo são 2560 bytes.
+Opções de compilação alteradas, recompilando tudo
+O sketch usa 11574 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1388 bytes (67%) de memória dinâmica, deixando 660 bytes para variáveis locais. O máximo são 2048 bytes.
+
+
+
+
+
+
+
+
+
+
+/home/lso/Documentos/Computarias/pcdisplay/pcdisplay-guest/pcdisplay-guest.ino: In function 'void before()':
+pcdisplay-guest:85: error: 'REQUEST_COMMANDS' was not declared in this scope
+         Serial.println (REQUEST_COMMANDS[i]);
+                         ^
+exit status 1
+'REQUEST_COMMANDS' was not declared in this scope
+
+
+
+
+
+
+
+
+
+
+/home/lso/Documentos/Computarias/pcdisplay/pcdisplay-guest/pcdisplay-guest.ino: In function 'void before()':
+pcdisplay-guest:85: error: 'REQUEST_COMMANDS' was not declared in this scope
+         Serial.println (REQUEST_COMMANDS[i]);
+                         ^
+exit status 1
+'REQUEST_COMMANDS' was not declared in this scope
+
+
+
+
+
+
+
+
+
+
+/home/lso/Documentos/Computarias/pcdisplay/pcdisplay-guest/pcdisplay-guest.ino: In function 'void before()':
+pcdisplay-guest:85: error: 'REQUEST_COMMANDS' was not declared in this scope
+         Serial.println (REQUEST_COMMANDS[i]);
+                         ^
+exit status 1
+'REQUEST_COMMANDS' was not declared in this scope
+O sketch usa 11636 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1444 bytes (70%) de memória dinâmica, deixando 604 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_recv(): programmer is not responding
+avrdude: stk500_recv(): programmer is not responding
+
+
+
+
+
+
+
+
+
+
+O sketch usa 11636 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1444 bytes (70%) de memória dinâmica, deixando 604 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_recv(): programmer is not responding
+O sketch usa 11636 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1444 bytes (70%) de memória dinâmica, deixando 604 bytes para variáveis locais. O máximo são 2048 bytes.
+Problema ao carregar para a placa. Veja http://www.arduino.cc/en/Guide/Troubleshooting#upload para sugestões.
+
+** (java:2704): WARNING **: 19:34:56.765: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:34:56.765: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:34:56.765: invalid source position for vertical gradient
+
+** (java:2704): WARNING **: 19:34:56.765: invalid source position for vertical gradient
+
+
+
+
+
+
+
+
+
+
+Opções de compilação alteradas, recompilando tudo
+Archiving built core (caching) in: /tmp/arduino_cache_418447/core/core_arduino_avr_mini_cpu_atmega328_efc5e07fa0d729e21ca56f122d353734.a
+O sketch usa 11636 bytes (40%) de espaço de armazenamento para programas. O máximo são 28672 bytes.
+Variáveis globais usam 1444 bytes (70%) de memória dinâmica, deixando 604 bytes para variáveis locais. O máximo são 2048 bytes.
+Opções de compilação alteradas, recompilando tudo
+O sketch usa 11636 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1444 bytes (70%) de memória dinâmica, deixando 604 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11636 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1444 bytes (70%) de memória dinâmica, deixando 604 bytes para variáveis locais. O máximo são 2048 bytes.
+
+
+
+
+
+
+
+
+
+
+O sketch usa 11638 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11638 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11638 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+
+
+
+
+
+
+
+
+
+
+O sketch usa 11638 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11618 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11582 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11576 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1440 bytes (70%) de memória dinâmica, deixando 608 bytes para variáveis locais. O máximo são 2048 bytes.
+/home/lso/Documentos/Computarias/pcdisplay/pcdisplay-guest/states.ino: In function 'void draw_ram(LiquidCrystal)':
+states:52: error: 'floar' was not declared in this scope
+     floar used  = 0.1;
+     ^
+states:55: error: 'used' was not declared in this scope
+     sprintf (line, "RAM: %f/%f GB", used, total);
+                                     ^
+exit status 1
+'floar' was not declared in this scope
+O sketch usa 11576 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1440 bytes (70%) de memória dinâmica, deixando 608 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11804 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11580 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+
+
+
+
+
+
+
+
+
+
+O sketch usa 11580 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11580 bytes (35%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+avrdude: stk500_getsync() attempt 1 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 2 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 3 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 4 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 5 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 6 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 7 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 8 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 9 of 10: not in sync: resp=0x00
+avrdude: stk500_getsync() attempt 10 of 10: not in sync: resp=0x00
+Ocorreu um erro enquanto o sketch era carregado
+O sketch usa 11644 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+
+
+
+
+
+
+
+
+
+
+O sketch usa 11626 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1440 bytes (70%) de memória dinâmica, deixando 608 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 11626 bytes (36%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1440 bytes (70%) de memória dinâmica, deixando 608 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 12046 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+
+
+
+
+
+
+
+
+
+
+O sketch usa 12050 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 12050 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 12046 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 12046 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+
+
+
+
+
+
+
+
+
+
+O sketch usa 12050 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 12050 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.
+O sketch usa 12168 bytes (37%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 1446 bytes (70%) de memória dinâmica, deixando 602 bytes para variáveis locais. O máximo são 2048 bytes.

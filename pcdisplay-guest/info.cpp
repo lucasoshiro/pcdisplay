@@ -6,18 +6,17 @@
 #define CMM_CASE(s) (strcmp (command, s) == 0)
 
 static void parse_media (char *args);
+static void unescape (char *dest, char *origin);
 
 info_t INFO;
 
 char REQUEST_COMMANDS[][8] = {"CPU",
                               "RAM",
-                              "NAME",
                               "NET",
                               "TIME",
                               "VOLUME",
                               "TEMP",
-                              "SYSINFO",
-                              "MEDIA"};
+                              ""};
 
 void info_init () {
     INFO.cpu_usage    = 0;
@@ -51,12 +50,12 @@ void parse (char *s) {
 
     if      (CMM_CASE ("CPU"))     sscanf (args, "%d",           &INFO.cpu_usage);
     else if (CMM_CASE ("RAM"))     sscanf (args, "%ld%ld",       &INFO.ram_used, &INFO.ram_total);
-    else if (CMM_CASE ("NAME"))    sscanf (args, "%s",           INFO.computer_name);
+    else if (CMM_CASE ("NAME"))    unescape (INFO.computer_name, args);
     else if (CMM_CASE ("NET"))     sscanf (args, "%ld%ld",       &INFO.net_down_speed, &INFO.net_up_speed);
     else if (CMM_CASE ("TIME"))    sscanf (args, "%d%d%d%d%d%d", &INFO.day, &INFO.month, &INFO.year, &INFO.hour, &INFO.min, &INFO.sec);
     else if (CMM_CASE ("VOLUME"))  sscanf (args, "%d",           &INFO.volume);
     else if (CMM_CASE ("TEMP"))    sscanf (args, "%d",           &INFO.temp);
-    else if (CMM_CASE ("SYSINFO")) sscanf (args, "%s",           INFO.sys_info);
+    else if (CMM_CASE ("SYSINFO")) unescape (INFO.sys_info, args);
     else if (CMM_CASE ("MEDIA"))   parse_media (args);
 
     free (command);
@@ -119,4 +118,36 @@ static void parse_media (char *args) {
     }
 
     sscanf (c, "%d", &INFO.media_track);
+}
+
+static void unescape (char *dest, char *origin) {
+    char *d, *o;
+    int backslash;
+
+    for (d = dest, o = origin; *o != '\0'; o++) {
+        if (backslash) {
+            backslash = 0;
+
+            switch (*o) {
+            case 'n':  *d = '\n'; break;
+            case '\\': *d = '\\'; break;
+            case 't':  *d = '\t'; break;
+            case '\'': *d = '\''; break;
+            default:   *d = *o;
+            }
+
+            d++;
+            continue;
+        }
+
+        if (*o == '\\') {
+            backslash = 1;
+            continue;
+        }
+        else {
+            *d = *o;
+            d++;
+        }
+    }
+    *d = '\0';
 }

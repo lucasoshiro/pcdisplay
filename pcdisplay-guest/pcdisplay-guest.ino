@@ -22,7 +22,7 @@ int read_serial () {
         }
         
         *c = Serial.read ();
-        if (*c == '\n') {
+        if (*c == '\n' || *c == '\0') {
             *c = '\0';
             break;
         }
@@ -36,7 +36,7 @@ void try_wait_connection () {
 
     do {
         Serial.println ("HELLO");
-        disconnected = read_serial ();// && !IS_HELLO (serial_buffer);
+        disconnected = read_serial () && !IS_HELLO (serial_buffer);
         delay (100);
     } while (disconnected);
 }
@@ -70,7 +70,7 @@ void setup () {
     delay (500);
 }
 
-void loop () {
+void before () {
     try_wait_connection ();
     
     Serial.println ("NAME");
@@ -80,9 +80,17 @@ void loop () {
     Serial.println ("SYSINFO");
     read_serial ();
     parse (serial_buffer);
-    
-    current_state = 0;
 
+    for (int i = 0; i < 7; i++) {
+        Serial.println (REQUEST_COMMANDS[i]);
+        read_serial ();
+        parse (serial_buffer);
+    }
+
+    current_state = 0;
+}
+
+void main_loop () {
     for (;;) {
         if (change_screen) {
             current_state = (current_state + 1) % 5;
@@ -93,4 +101,9 @@ void loop () {
         draw[current_state] (lcd);
         delay (500);
     }
+}
+
+void loop () {
+    before ();
+    main_loop ();
 }
