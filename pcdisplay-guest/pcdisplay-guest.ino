@@ -7,7 +7,7 @@
 
 LiquidCrystal lcd (12, 11, 6, 5, 4, 3);
 
-char serial_buffer[512];
+char serial_buffer[256];
 state_t current_state;
 int current_request;
 int received_last_request;
@@ -49,7 +49,7 @@ void schedule_screen_change () {
 
 void handle_screen_change () {
     if (change_screen) {
-        current_state = (current_state + 1) % 5;
+        current_state = (current_state + 1) % NUM_STATES;
         delay (100);
         change_screen = 0;
     }

@@ -51,7 +51,7 @@ void parse (char *s) {
     if      (CMM_CASE ("CPU"))     sscanf (args, "%d",           &INFO.cpu_usage);
     else if (CMM_CASE ("RAM"))     sscanf (args, "%ld%ld",       &INFO.ram_used, &INFO.ram_total);
     else if (CMM_CASE ("NAME"))    unescape (INFO.computer_name, args);
-    else if (CMM_CASE ("NET"))     sscanf (args, "%ld%ld",       &INFO.net_down_speed, &INFO.net_up_speed);
+    else if (CMM_CASE ("NET"))     sscanf (args, "%lu%lu",       &INFO.net_down_speed, &INFO.net_up_speed);
     else if (CMM_CASE ("TIME"))    sscanf (args, "%d%d%d%d%d%d", &INFO.day, &INFO.month, &INFO.year, &INFO.hour, &INFO.min, &INFO.sec);
     else if (CMM_CASE ("VOLUME"))  sscanf (args, "%d",           &INFO.volume);
     else if (CMM_CASE ("TEMP"))    sscanf (args, "%d",           &INFO.temp);
@@ -61,20 +61,21 @@ void parse (char *s) {
     free (command);
 }
 
-void print_pretty () {
-    printf ("CPU:  %d\n",                 INFO.cpu_usage);
-    printf ("RAM:  %f\n",                 (float) INFO.ram_used / INFO.ram_total);
-    printf ("NET:  %ld %ld\n",            INFO.net_up_speed, INFO.net_down_speed);
-    printf ("DATE: %d/%d/%d\n",           INFO.day, INFO.month, INFO.year);
-    printf ("TIME: %d:%d:%d\n",           INFO.hour, INFO.min, INFO.sec);
-    printf ("VOL:  %d\n",                 INFO.volume);
-    printf ("TEMP: %d\n",                 INFO.temp);
-    printf ("NAME: %s\n",                 INFO.computer_name);
-    printf ("INFO: %s\n",                 INFO.sys_info);
-    printf ("MEDIA: %d - %s (%s) - %s\n", INFO.media_track, INFO.media_title, INFO.media_album, INFO.media_artist);
+// DEPRECATED
+// void print_pretty () {
+//     printf ("CPU:  %d\n",                 INFO.cpu_usage);
+//     printf ("RAM:  %f\n",                 (float) INFO.ram_used / INFO.ram_total);
+//     printf ("NET:  %ld %ld\n",            INFO.net_up_speed, INFO.net_down_speed);
+//     printf ("DATE: %d/%d/%d\n",           INFO.day, INFO.month, INFO.year);
+//     printf ("TIME: %d:%d:%d\n",           INFO.hour, INFO.min, INFO.sec);
+//     printf ("VOL:  %d\n",                 INFO.volume);
+//     printf ("TEMP: %d\n",                 INFO.temp);
+//     printf ("NAME: %s\n",                 INFO.computer_name);
+//     printf ("INFO: %s\n",                 INFO.sys_info);
+//     printf ("MEDIA: %d - %s (%s) - %s\n", INFO.media_track, INFO.media_title, INFO.media_album, INFO.media_artist);
 
-    putchar ('\n');
-}
+//     putchar ('\n');
+// }
 
 static void parse_media (char *args) {
     char buffer[128];

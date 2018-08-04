@@ -12,6 +12,8 @@ void (*draw[7]) (LiquidCrystal lcd) = {draw_sysinfo,
                                        draw_net,
                                        draw_media};
 
+static int log2 (unsigned long n);
+
 void draw_sysinfo (LiquidCrystal lcd) {
     lcd.setCursor (0, 0);
     lcd.print (INFO.computer_name);
@@ -24,8 +26,8 @@ void draw_sysinfo (LiquidCrystal lcd) {
 void draw_time (LiquidCrystal lcd) {
     char buffer[2][17];
 
-    sprintf (buffer[0], "%02d/%02d/%d", INFO.day, INFO.month, INFO.year);
-    sprintf (buffer[1], "%d:%d", INFO.hour, INFO.min);
+    sprintf (buffer[0], "%02d/%02d/%04d", INFO.day, INFO.month, INFO.year);
+    sprintf (buffer[1], "%02d:%02d", INFO.hour, INFO.min);
 
     lcd.setCursor (0, 0);
     lcd.print (buffer[0]);
@@ -83,11 +85,33 @@ void draw_temp (LiquidCrystal lcd) {
 }
 
 void draw_net (LiquidCrystal lcd) {
+    char unit_str[][3] = {"B", "kB", "MB", "GB"};
+    char line[128];
     
+    int unit_up = log2 (INFO.net_up_speed) / 10;
+    int unit_down = log2 (INFO.net_down_speed) / 10;
+
+    sprintf (line, "Up:   %lu %s/s",
+             INFO.net_up_speed / ((unsigned long) 1 << 10 * unit_up),
+             unit_str[unit_up]);
+    lcd.setCursor (0, 0);
+    lcd.print (line);
+    clear_line_section (lcd, 0, strlen (line), 17);
+    
+    sprintf (line, "Down: %lu %s/s",
+             INFO.net_down_speed / ((unsigned long)1 << 10 * unit_down),
+             unit_str[unit_down]);
+    lcd.setCursor (0, 1);
+    lcd.print (line);
+    clear_line_section (lcd, 1, strlen (line), 17);
 }
 
 void draw_media (LiquidCrystal lcd) {
     
 }
 
-
+static int log2 (unsigned long n) {
+    int l;
+    for (l = -1; n > 0; l++, n >>= 1);
+    return l;
+}

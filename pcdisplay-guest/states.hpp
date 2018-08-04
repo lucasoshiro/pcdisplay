@@ -2,6 +2,8 @@
 #define _STATES
 #include "lcd_util.hpp"
 
+#define NUM_STATES 6
+
 enum state_t {SYSINFO, TIME, CPU, RAM, TEMP, NET, MEDIA};
 
 extern void (*draw[7]) (LiquidCrystal lcd);
