@@ -3,6 +3,8 @@
 
 #define IS_HELLO(s) (strcmp (s, "HELLO") == 0)
 
+#define NUM_REQUESTS 7
+
 struct info_t {
     int  cpu_usage;
     int  volume;

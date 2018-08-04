@@ -36,6 +36,11 @@ class Arduino
     s.is_a?(String) ? s : nil
   end
 
+  def flush_input
+    until @arduino_serialport.flush_input
+    end
+  end
+
   def >> s
     s << read_string
   end

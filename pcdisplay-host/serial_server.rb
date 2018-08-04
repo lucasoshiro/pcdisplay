@@ -42,6 +42,7 @@ def send_string s
 end
 
 def serve
+  $arduino.flush_input
   loop do
     raw_string = receive_string
 

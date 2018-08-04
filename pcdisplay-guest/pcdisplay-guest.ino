@@ -9,8 +9,10 @@ LiquidCrystal lcd (12, 11, 6, 5, 4, 3);
 
 char serial_buffer[512];
 state_t current_state;
+int current_request;
 int received_last_request;
 int change_screen = 0;
+int connected;
 
 int read_serial () {
     char *c;
@@ -45,6 +47,28 @@ void schedule_screen_change () {
     change_screen = 1;
 }
 
+void handle_screen_change () {
+    if (change_screen) {
+        current_state = (current_state + 1) % 5;
+        delay (100);
+        change_screen = 0;
+    }
+}
+
+void send_requests () {
+    Serial.println (REQUEST_COMMANDS[current_request]);
+}
+
+void handle_responses () {
+    if (read_serial ()) {
+        connected = 0;
+    }
+    else {
+        parse (serial_buffer);
+        current_request = (current_request + 1) % NUM_REQUESTS;
+    }
+}
+
 void setup () {
     Serial.begin (9600);
     
@@ -72,38 +96,42 @@ void setup () {
 
 void before () {
     try_wait_connection ();
+
+    connected = 1;
     
     Serial.println ("NAME");
-    read_serial ();
+    if (read_serial ()) return;
     parse (serial_buffer);
     
     Serial.println ("SYSINFO");
-    read_serial ();
+    if (read_serial ()) return;
     parse (serial_buffer);
 
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < NUM_REQUESTS; i++) {
         Serial.println (REQUEST_COMMANDS[i]);
-        read_serial ();
+        if (read_serial ()) return;
         parse (serial_buffer);
     }
 
     current_state = 0;
+    current_request = 0;
 }
 
 void main_loop () {
-    for (;;) {
-        if (change_screen) {
-            current_state = (current_state + 1) % 5;
-            delay (100);
-            change_screen = 0;
-        }
-
+    while (connected) {
+        handle_screen_change ();
+        send_requests ();
+        handle_responses ();
         draw[current_state] (lcd);
-        delay (500);
+        delay (100);
     }
 }
 
 void loop () {
     before ();
     main_loop ();
+    lcd.clear ();
+    lcd.setCursor (0, 0);
+    lcd.print ("Connection lost");
+    delay (1000);
 }
