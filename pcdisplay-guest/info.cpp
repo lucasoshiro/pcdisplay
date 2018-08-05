@@ -16,7 +16,7 @@ char REQUEST_COMMANDS[][8] = {"CPU",
                               "TIME",
                               "VOLUME",
                               "TEMP",
-                              ""};
+                              "MEDIA"};
 
 void info_init () {
     INFO.cpu_usage    = 0;

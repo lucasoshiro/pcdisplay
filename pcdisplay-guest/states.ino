@@ -107,7 +107,29 @@ void draw_net (LiquidCrystal lcd) {
 }
 
 void draw_media (LiquidCrystal lcd) {
+    char line[17];
     
+    if (INFO.media_track) {
+        char track_name[17];
+        strncpy (track_name, INFO.media_title, 11);
+        track_name[11] = '\0';
+        sprintf (line, "%d - %s", INFO.media_track, track_name);
+    }
+    else {
+        strncpy (line, INFO.media_title, 16);
+        line[16] = '\0';
+    }
+
+    lcd.setCursor (0, 0);
+    lcd.print (line);
+    clear_line_section (lcd, 0, strlen (line), 17);
+
+    strncpy (line, INFO.media_artist, 16);
+    line[16] = '\0';
+    
+    lcd.setCursor (0, 1);
+    lcd.print (line);
+    clear_line_section (lcd, 1, strlen (line), 17);
 }
 
 static int log2 (unsigned long n) {

@@ -2,7 +2,7 @@
 #define _STATES
 #include "lcd_util.hpp"
 
-#define NUM_STATES 6
+#define NUM_STATES 7
 
 enum state_t {SYSINFO, TIME, CPU, RAM, TEMP, NET, MEDIA};
 

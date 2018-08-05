@@ -2,12 +2,16 @@
 
 load 'pc.rb'
 load 'serial_server.rb'
+
 require 'shellwords'
+require 'i18n'
 
 $verbose = ARGV.member? '-v'
 $stdio = ARGV.member? '-i'
 
 PC.instance
+
+I18n.config.available_locales = :en
 
 request 'HELLO' do
   'HELLO'
@@ -75,10 +79,10 @@ request 'MEDIA' do
     player = PC.instance.active_players_name[0]
     metadata = PC.instance.player_metadata player
 
-    title  = Shellwords.escape(metadata[:title])[0..63]  || ''
-    album  = Shellwords.escape(metadata[:album])[0..63]  || ''
-    artist = Shellwords.escape(metadata[:artist])[0..63] || ''
-    track  = metadata[:track]                            || '-1'
+    title  = Shellwords.escape(I18n.transliterate(metadata[:title][0..63]))  || ''
+    album  = Shellwords.escape(I18n.transliterate(metadata[:album][0..63]))  || ''
+    artist = Shellwords.escape(I18n.transliterate(metadata[:artist][0..63])) || ''
+    track  = metadata[:track] || '0'
     
     "MEDIA #{title} #{album} #{artist} #{track}"
   end
