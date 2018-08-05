@@ -3,8 +3,10 @@ require 'byebug'
 
 $rules = {}
 $interval = 0.1
-$arduino = Arduino.new nil, nil
 $verbose = false
+$stdio = false
+
+$arduino = Arduino.new(nil, nil)
 
 def verbose v
   $verbose = v
@@ -31,18 +33,18 @@ def parse_and_execute raw_string
 end
 
 def receive_string
-  s = $arduino.read_string
+  s = $stdio ? $stdin.gets : $arduino.read_string
   if $verbose then puts "RECEIVED #{s}" end
   return s
 end
 
 def send_string s
-  $arduino.send_string s
+  $stdio ? $stdout.puts(s) : $arduino.send_string(s)
   if $verbose then puts "SENT #{s}" end
 end
 
 def serve
-  $arduino.flush_input
+  if !$stdio then $arduino.flush_input end
   loop do
     raw_string = receive_string
 

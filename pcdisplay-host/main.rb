@@ -5,6 +5,7 @@ load 'serial_server.rb'
 require 'shellwords'
 
 $verbose = ARGV.member? '-v'
+$stdio = ARGV.member? '-i'
 
 PC.instance
 
@@ -70,13 +71,14 @@ request 'MEDIA' do
   if PC.instance.active_players_name.length == 0
     nil
   else
+    puts PC.instance.active_players_name
     player = PC.instance.active_players_name[0]
     metadata = PC.instance.player_metadata player
-    
-    title  = Shellwords.escape(metadata[:title])  || ''
-    album  = Shellwords.escape(metadata[:album])  || ''
-    artist = Shellwords.escape(metadata[:artist]) || ''
-    track  = metadata[:track]                     || '-1'
+
+    title  = Shellwords.escape(metadata[:title])[0..63]  || ''
+    album  = Shellwords.escape(metadata[:album])[0..63]  || ''
+    artist = Shellwords.escape(metadata[:artist])[0..63] || ''
+    track  = metadata[:track]                            || '-1'
     
     "MEDIA #{title} #{album} #{artist} #{track}"
   end

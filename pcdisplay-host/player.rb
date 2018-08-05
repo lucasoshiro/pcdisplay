@@ -81,7 +81,7 @@ class Player
       {
         title:  m['xesam:title'],
         album:  m['xesam:album'],
-        artist: m['xesam:artist'][0],
+        artist: m['xesam:artist'] && m['xesam:artist'][0],
         track:  m['xesam:trackNumber']
       }
     end

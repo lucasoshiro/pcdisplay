@@ -2,7 +2,7 @@ require 'serialport'
 
 class Arduino
   def initialize(port_str, baud_rate)
-    @port_str = port_str || '/dev/ttyACM1'
+    @port_str = port_str || '/dev/ttyACM0'
     @baud_rate = baud_rate || 9600
     @data_bits = 8
     @stop_bits = 1
