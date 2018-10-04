@@ -61,28 +61,19 @@ void parse (char *s) {
     free (command);
 }
 
-// DEPRECATED
-// void print_pretty () {
-//     printf ("CPU:  %d\n",                 INFO.cpu_usage);
-//     printf ("RAM:  %f\n",                 (float) INFO.ram_used / INFO.ram_total);
-//     printf ("NET:  %ld %ld\n",            INFO.net_up_speed, INFO.net_down_speed);
-//     printf ("DATE: %d/%d/%d\n",           INFO.day, INFO.month, INFO.year);
-//     printf ("TIME: %d:%d:%d\n",           INFO.hour, INFO.min, INFO.sec);
-//     printf ("VOL:  %d\n",                 INFO.volume);
-//     printf ("TEMP: %d\n",                 INFO.temp);
-//     printf ("NAME: %s\n",                 INFO.computer_name);
-//     printf ("INFO: %s\n",                 INFO.sys_info);
-//     printf ("MEDIA: %d - %s (%s) - %s\n", INFO.media_track, INFO.media_title, INFO.media_album, INFO.media_artist);
-
-//     putchar ('\n');
-// }
-
 static void parse_media (char *args) {
     char buffer[128];
     char *dest[] = {INFO.media_title, INFO.media_album, INFO.media_artist};
     int backslash = 0;
     int dest_index = 0;
     char *c, *b = buffer;
+
+    if (strcmp (args, "MEDIA") == 0) {
+        INFO.media_title[0] = '\0';
+        INFO.media_album[0] = '\0';
+        INFO.media_artist[0] = '\0';
+        INFO.media_track = 0;
+    }
 
     for (c = args; *c != '\0' && dest_index < 3; c++) {
         // Unescaping

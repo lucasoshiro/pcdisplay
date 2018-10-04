@@ -77,9 +77,12 @@ void setup () {
     lcd.createChar (2, charMidEmptyBlock);
     lcd.createChar (3, charEndEmptyBlock);
     lcd.createChar (4, charDegrees);
+
+    pinMode (8, OUTPUT), digitalWrite (8, HIGH); // My 5V pin is broken :(
     
     pinMode (13, OUTPUT);
     pinMode (2, INPUT);
+
 
     attachInterrupt (digitalPinToInterrupt (2), schedule_screen_change, RISING);
 

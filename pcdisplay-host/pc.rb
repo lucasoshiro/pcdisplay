@@ -25,7 +25,7 @@ class PC
       refresh_ram: 1,
       refresh_net: 1,
       refresh_cpu_temperature: 1,
-      refresh_players: 0.5,
+      refresh_players: 1,
       refresh_volume: 10
     }
 
@@ -152,6 +152,9 @@ class PC
 
   def refresh_players
     active_players_names = Player.active_players_names
+
+    print active_players_names
+    puts ''
 
     dead_players_names = @players.keys - active_players_names
     new_players_names = active_players_names - @players.keys

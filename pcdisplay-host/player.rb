@@ -3,8 +3,7 @@ require 'byebug'
 
 class Player
   @@bus = DBus::SessionBus.instance
-  INTERVAL = 2
-
+  
   def self.active_players_names
     @@bus.proxy.ListNames[0].select do
       |name|
@@ -24,7 +23,6 @@ class Player
 
     begin
       @properties_interface.on_signal 'PropertiesChanged' do
-        puts 1
         refresh_metadata
     end
     rescue Exception => m
@@ -35,12 +33,6 @@ class Player
     @loop << @@bus
 
     @metadata_thread = Thread.new {@loop.run}
-    
-    #     loop do
-    #       refresh_metadata
-    #       sleep 1
-    #     end
-    
   end
 
   def refresh_metadata
@@ -75,13 +67,13 @@ class Player
   def metadata
     m = {}
     @mutex.synchronize {m = @metadata}
-    
+
     if m.empty? then m
     else
       {
         title:  m['xesam:title'],
         album:  m['xesam:album'],
-        artist: m['xesam:artist'] && m['xesam:artist'][0],
+        artist: m['xesam:artist'] ? m['xesam:artist'][0] : nil,
         track:  m['xesam:trackNumber']
       }
     end

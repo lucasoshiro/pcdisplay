@@ -79,9 +79,9 @@ request 'MEDIA' do
     player = PC.instance.active_players_name[0]
     metadata = PC.instance.player_metadata player
 
-    title  = Shellwords.escape(I18n.transliterate(metadata[:title][0..63]))  || ''
-    album  = Shellwords.escape(I18n.transliterate(metadata[:album][0..63]))  || ''
-    artist = Shellwords.escape(I18n.transliterate(metadata[:artist][0..63])) || ''
+    title  = Shellwords.escape(I18n.transliterate(metadata[:title] || ''))[0..63]
+    album  = Shellwords.escape(I18n.transliterate(metadata[:album] || ''))[0..63]
+    artist = Shellwords.escape(I18n.transliterate(metadata[:artist] || ''))[0..63]
     track  = metadata[:track] || '0'
     
     "MEDIA #{title} #{album} #{artist} #{track}"
