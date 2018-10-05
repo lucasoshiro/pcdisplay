@@ -24,8 +24,8 @@ void info_init () {
     INFO.temp         = 21;
     INFO.ram_used     = 0; INFO.ram_total      = 1;
     INFO.net_up_speed = 0; INFO.net_down_speed = 0;
-    INFO.day          = 0; INFO.month          = 0; INFO.year         = 0;
-    INFO.hour         = 0; INFO.min            = 0; INFO.sec          = 0;
+    INFO.day          = 0; INFO.month          = 0; INFO.year = 0;
+    INFO.hour         = 0; INFO.min            = 0; INFO.sec  = 0;
     INFO.media_track  = -1;
 
     *INFO.computer_name = '\0';
@@ -69,10 +69,10 @@ static void parse_media (char *args) {
     char *c, *b = buffer;
 
     if (strcmp (args, "MEDIA") == 0) {
-        INFO.media_title[0] = '\0';
-        INFO.media_album[0] = '\0';
+        INFO.media_title[0]  = '\0';
+        INFO.media_album[0]  = '\0';
         INFO.media_artist[0] = '\0';
-        INFO.media_track = 0;
+        INFO.media_track     = 0;
     }
 
     for (c = args; *c != '\0' && dest_index < 3; c++) {
@@ -93,7 +93,7 @@ static void parse_media (char *args) {
         }
 
         switch (*c) {
-        case'\\':
+        case '\\':
             backslash = 1;
             break;
 

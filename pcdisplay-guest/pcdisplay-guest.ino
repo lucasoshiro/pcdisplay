@@ -5,7 +5,6 @@
 #include "states.hpp"
 #include "lcd_util.hpp"
 
-LiquidCrystal lcd (12, 11, 6, 5, 4, 3);
 
 char serial_buffer[256];
 state_t current_state;
@@ -60,9 +59,7 @@ void send_requests () {
 }
 
 void handle_responses () {
-    if (read_serial ()) {
-        connected = 0;
-    }
+    if (read_serial ()) connected = 0;
     else {
         parse (serial_buffer);
         current_request = (current_request + 1) % NUM_REQUESTS;
@@ -78,11 +75,8 @@ void setup () {
     lcd.createChar (3, charEndEmptyBlock);
     lcd.createChar (4, charDegrees);
 
-    pinMode (8, OUTPUT), digitalWrite (8, HIGH); // My 5V pin is broken :(
-    
     pinMode (13, OUTPUT);
     pinMode (2, INPUT);
-
 
     attachInterrupt (digitalPinToInterrupt (2), schedule_screen_change, RISING);
 
@@ -125,7 +119,7 @@ void main_loop () {
         handle_screen_change ();
         send_requests ();
         handle_responses ();
-        draw[current_state] (lcd);
+        draw[current_state] ();
         delay (100);
     }
 }

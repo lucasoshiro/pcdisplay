@@ -1,14 +1,17 @@
 #include "lcd_util.hpp"
 #include <math.h>
+#include <string.h>
 
-void printCenter (LiquidCrystal lcd, int l, char *s) {
+LiquidCrystal lcd (12, 11, 6, 5, 4, 3);
+
+void printCenter (int l, char *s) {
     int spc = (16 - strlen (s)) / 2;
     lcd.clear ();
     lcd.setCursor (spc, l);
     lcd.write (s);
 }
 
-void draw_percent (LiquidCrystal lcd, int line, int percent) {
+void draw_percent (int line, int percent) {
     int fill = round (percent * 16. / 100.);
     
     lcd.setCursor (0, line);
@@ -18,14 +21,54 @@ void draw_percent (LiquidCrystal lcd, int line, int percent) {
         lcd.write (byte (1));
         fill++;
     }
+
     for (int i = fill; i <= 14; i++) lcd.write (byte (2));
+
     if (fill < 16) {
         lcd.setCursor (15, line);
         lcd.write (byte (3));
     }
 }
 
-void clear_line_section (LiquidCrystal lcd, int line, int index, int end) {
+void clear_line_section (int line, int index, int end) {
     lcd.setCursor (index, line);
     for (int i = index; i < end; i++) lcd.write (' ');
+}
+
+RotatingLine::RotatingLine (char *s, int line) {
+    this->len = strlen(s);
+    this->s = new char[this->len + 1];
+    strcpy (this->s, s);
+    this->line = line;
+    this->first = 0;
+    this->skip_count = -1;
+}
+
+RotatingLine::~RotatingLine () {
+    delete[] this->s;
+}
+
+void RotatingLine::print () {
+    int i;
+
+    this->skip_count = (this->skip_count + 1) % ROTATING_SKIP;
+    if (this->skip_count != 0) return;
+    
+    lcd.setCursor (0, this->line);
+
+    if (this->len < 16) {
+        lcd.write (this->s);
+        clear_line_section (this->line, this->len, 17);
+        return;
+    }
+
+    for (i = 0; i < 16; i++)
+        lcd.write (this->s[(this->first + i) % this->len]);
+    
+    clear_line_section (this->line, i, 17);
+    this->first = (this->first + 1) % this->len;
+}
+
+int RotatingLine::same_str (char *s) {
+    return strcmp(s, this->s) == 0;
 }

@@ -6,19 +6,19 @@
 
 enum state_t {SYSINFO, TIME, CPU, RAM, TEMP, NET, MEDIA};
 
-extern void (*draw[7]) (LiquidCrystal lcd);
+extern void (*draw[7]) ();
 
-void draw_sysinfo (LiquidCrystal lcd);
+void draw_sysinfo ();
 
-void draw_time (LiquidCrystal lcd);
+void draw_time ();
 
-void draw_cpu (LiquidCrystal lcd);
+void draw_cpu ();
 
-void draw_ram (LiquidCrystal lcd);
+void draw_ram ();
 
-void draw_temp (LiquidCrystal lcd);
+void draw_temp ();
 
-void draw_net (LiquidCrystal lcd);
+void draw_net ();
 
-void draw_media (LiquidCrystal lcd);
+void draw_media ();
 #endif
