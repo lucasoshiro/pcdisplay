@@ -5,7 +5,6 @@
 #include "states.hpp"
 #include "lcd_util.hpp"
 
-
 char serial_buffer[256];
 state_t current_state;
 int current_request;

@@ -19,6 +19,7 @@ public:
     ~RotatingLine ();
     void print ();
     int same_str (char *s);
+    void reset (char *s);
 private:
     char *s;
     int line;

@@ -7,17 +7,18 @@
 static int log2 (unsigned long n);
 
 void (*draw[7]) () = {draw_sysinfo,
-                                       draw_time,
-                                       draw_cpu,
-                                       draw_ram,
-                                       draw_temp,
-                                       draw_net,
-                                       draw_media};
+                      draw_time,
+                      draw_cpu,
+                      draw_ram,
+                      draw_temp,
+                      draw_net,
+                      draw_media};
 
 void draw_sysinfo () {
     lcd.setCursor (0, 0);
     lcd.print (INFO.computer_name);
     clear_line_section (0, strlen (INFO.computer_name), 17);
+    
     lcd.setCursor (0, 1);
     lcd.print (INFO.sys_info);
     clear_line_section (1, strlen (INFO.sys_info), 17);
@@ -107,32 +108,25 @@ void draw_net () {
 }
 
 void draw_media () {
-    char *line = new char[strlen (INFO.media_title) + 10];
+    char *line;
 
-    if (INFO.media_track != 0) {
+    line = new char[strlen (INFO.media_title) + 10];
+    if (INFO.media_track != 0)
         sprintf (line, "%d - %s  ", INFO.media_track, INFO.media_title);
-    }
-    else {
+    else 
         sprintf (line, "%s  ", INFO.media_title);
-        strcpy (line, INFO.media_title);
-    }
 
-    static RotatingLine t = RotatingLine (line, 0);
-    if (!t.same_str (line)) {
-        t = RotatingLine (line, 0);
-    }
+    static RotatingLine t (line, 0);
+    if (!t.same_str (line)) t.reset(line);
     t.print ();
     delete[] line;
 
     line = new char[strlen (INFO.media_artist) + 10];
     sprintf (line, "%s  ", INFO.media_artist);
 
-    static RotatingLine s = RotatingLine (line, 1);
-    if (!s.same_str (line)) {
-        s = RotatingLine (line, 1);
-    }
-
-    s.print ();
+    static RotatingLine a (line, 1);
+    if (!a.same_str (line)) a.reset (line);
+    a.print ();
     delete[] line;
 }
 

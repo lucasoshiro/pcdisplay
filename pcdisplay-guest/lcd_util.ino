@@ -36,7 +36,7 @@ void clear_line_section (int line, int index, int end) {
 }
 
 RotatingLine::RotatingLine (char *s, int line) {
-    this->len = strlen(s);
+    this->len = strlen (s);
     this->s = new char[this->len + 1];
     strcpy (this->s, s);
     this->line = line;
@@ -57,8 +57,8 @@ void RotatingLine::print () {
     lcd.setCursor (0, this->line);
 
     if (this->len < 16) {
-        lcd.write (this->s);
-        clear_line_section (this->line, this->len, 17);
+        lcd.print (this->s);
+        clear_line_section (this->line, this->len, 16);
         return;
     }
 
@@ -71,4 +71,13 @@ void RotatingLine::print () {
 
 int RotatingLine::same_str (char *s) {
     return strcmp(s, this->s) == 0;
+}
+
+void RotatingLine::reset (char *s) {
+    this->len = strlen (s);
+    delete[] this->s;
+    this->s = new char[this->len + 1];
+    strcpy (this->s, s);
+    this->first = 0;
+    this->skip_count = -1;
 }
