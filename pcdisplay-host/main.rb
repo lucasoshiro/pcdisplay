@@ -1,28 +1,31 @@
 #!/usr/bin/env ruby
 
-load 'pc.rb'
-load 'serial_server.rb'
+require_relative 'pc'
+require_relative 'serial_server'
 
 require 'shellwords'
 require 'i18n'
 
 $verbose = ARGV.member? '-v'
-$stdio = ARGV.member? '-i'
-
-PC.instance
+$stdio   = ARGV.member? '-i'
+$pc = PC.instance
 
 I18n.config.available_locales = :en
+
+bauld 9600
+port_path '/dev/ttyACM*'
+port_path '/dev/ttyUSB*'
 
 request 'HELLO' do
   'HELLO'
 end
 
 request 'CPU' do
-  "CPU #{(PC.instance.cpu_usage * 100).to_i}"
+  "CPU #{($pc.cpu_usage * 100).to_i}"
 end
 
 request 'RAM' do
-  ram = PC.instance.ram_info
+  ram = $pc.ram_info
   
   used_mem  = ram[:usedMem]
   total_mem = ram[:totalMem]
@@ -31,12 +34,12 @@ request 'RAM' do
 end
 
 request 'NAME' do
-  name = Shellwords.escape PC.instance.pc_name
+  name = Shellwords.escape $pc.pc_name
   "NAME #{name}"
 end
 
 request 'NET' do
-  net_info = PC.instance.net_info
+  net_info = $pc.net_info
   
   down = net_info[:downSpeed]
   up   = net_info[:upSpeed]
@@ -44,7 +47,7 @@ request 'NET' do
 end
 
 request 'TIME' do
-  time = PC.instance.time
+  time = $pc.time
   
   day   = time.day
   month = time.month
@@ -58,51 +61,56 @@ end
 
 request 'VOLUME' do
   |volume|
-  if volume then PC.instance.sound_volume = volume.to_i end
-  "VOLUME #{PC.instance.sound_volume}"
+  if volume then $pc.sound_volume = volume.to_i end
+  "VOLUME #{$pc.sound_volume}"
 end
 
 request 'TEMP' do
-  "TEMP #{PC.instance.cpu_temperature}"
+  "TEMP #{$pc.cpu_temperature}"
 end
 
 request 'SYSINFO' do
-  name = Shellwords.escape PC.instance.sys_info[:NAME]
+  name = Shellwords.escape $pc.sys_info[:NAME]
   "SYSINFO #{name}"
 end
 
 request 'MEDIA' do
-  if PC.instance.active_players_name.length == 0
-    nil
-  else
-    puts PC.instance.active_players_name
-    player = PC.instance.active_players_name[0]
-    metadata = PC.instance.player_metadata player
+  nil
 
-    title  = Shellwords.escape(I18n.transliterate(metadata[:title] || ''))[0..63]
-    album  = Shellwords.escape(I18n.transliterate(metadata[:album] || ''))[0..63]
-    artist = Shellwords.escape(I18n.transliterate(metadata[:artist] || ''))[0..63]
-    track  = metadata[:track] || '0'
+  # DEPRECATED !!!
+  # if $pc.active_players_name.length == 0
+  #   nil
+  # else
+  #   # puts '$pc.active_players_name'
+  #   # print $pc.active_players_name
+  #   # puts ''
+  #   player = $pc.active_players_name[0]
+  #   metadata = $pc.player_metadata player
+
+  #   title  = Shellwords.escape(I18n.transliterate(metadata[:title] || ''))[0..63]
+  #   album  = Shellwords.escape(I18n.transliterate(metadata[:album] || ''))[0..63]
+  #   artist = Shellwords.escape(I18n.transliterate(metadata[:artist] || ''))[0..63]
+  #   track  = metadata[:track] || '0'
     
-    "MEDIA #{title} #{album} #{artist} #{track}"
-  end
+  #   "MEDIA #{title} #{album} #{artist} #{track}"
+  # end
 end
 
 request 'MEDIA_PLAY_PAUSE' do
-  player = PC.instance.active_players_name[0]
-  player and PC.instance.player_play_pause player
+  player = $pc.active_players_name[0]
+  player and $pc.player_play_pause player
   nil
 end
 
 request 'MEDIA_NEXT' do
-  player = PC.instance.active_players_name[0]
-  player and PC.instance.player_next player
+  player = $pc.active_players_name[0]
+  player and $pc.player_next player
   nil
 end
 
 request 'MEDIA_PREV' do
-  player = PC.instance.active_players_name[0]
-  player and PC.instance.player_prev player
+  player = $pc.active_players_name[0]
+  player and $pc.player_prev player
   nil
 end
 

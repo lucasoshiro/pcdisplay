@@ -35,7 +35,7 @@ void try_wait_connection () {
     int disconnected = 0;
 
     do {
-        Serial.println ("HELLO");
+        Serial.println ("HELLO \"PCDISPLAY\"");
         disconnected = read_serial () && !IS_HELLO (serial_buffer);
         delay (100);
     } while (disconnected);

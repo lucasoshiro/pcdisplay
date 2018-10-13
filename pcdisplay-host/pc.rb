@@ -1,5 +1,5 @@
 require 'singleton'
-load 'player.rb'
+require_relative 'player'
 
 class PC
   include Singleton
@@ -83,12 +83,19 @@ class PC
      :refresh_ram,
      :refresh_net,
      :refresh_cpu_temperature,
-     :refresh_players
+    # :refresh_players
     ].each do |refresh_method|
       self.send refresh_method
       Thread.new do
         loop do
-          self.send refresh_method
+
+          begin
+            self.send refresh_method
+          rescue Exception => e
+            puts e.backtrace
+            puts ''
+            puts ''
+          end
           sleep @intervals[refresh_method]
         end
       end
@@ -151,8 +158,10 @@ class PC
   end
 
   def refresh_players
+    puts 'M'
     active_players_names = Player.active_players_names
 
+    puts 'active_players_names'
     print active_players_names
     puts ''
 

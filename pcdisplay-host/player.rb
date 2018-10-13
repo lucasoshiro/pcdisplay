@@ -1,14 +1,21 @@
 require 'dbus'
 require 'byebug'
 
+$VERBOSE = nil
+
 class Player
   @@bus = DBus::SessionBus.instance
-  
+
   def self.active_players_names
     @@bus.proxy.ListNames[0].select do
       |name|
       name.match(/^org\.mpris\.MediaPlayer2/)
     end
+  end
+
+  def initialize service_name
+    @service_name = service_name
+    @player_interface = @@bus.service(@service_name).object('/org/mpris/MediaPlayer2')['org.mpris.MediaPlayer2.Player']
   end
 
   def initialize name

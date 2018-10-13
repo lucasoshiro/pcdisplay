@@ -1,15 +1,30 @@
-load 'arduino_serial.rb'
+require_relative 'arduino_serial'
 require 'byebug'
 
 $rules = {}
 $interval = 0.1
 $verbose = false
 $stdio = false
+$ports = []
+$arduino = nil
+$bauld = nil
 
-$arduino = Arduino.new(nil, nil)
+# begin
+#   $arduino = Arduino.new nil, nil
+# rescue Errno::ENOENT => e
+#   puts e
+# end
 
 def verbose v
   $verbose = v
+end
+
+def port_path port_str
+  $ports += Dir[port_str]
+end
+
+def bauld b
+  $bauld = b
 end
 
 def request request_name, &block
@@ -39,11 +54,20 @@ def receive_string
 end
 
 def send_string s
-  $stdio ? $stdout.puts(s) : $arduino.send_string(s)
+  $stdio ? $nstdout.puts(s) : $arduino.send_string(s)
   if $verbose then puts "SENT #{s}" end
 end
 
+def get_valid_arduino
+  if $bauld && $ports && $ports.length > 0
+    Arduino.new($ports.reject {|x| x.nil?}[0], $bauld)
+  else
+    nil
+  end
+end
+
 def serve
+  $arduino = get_valid_arduino
   if !$stdio then $arduino.flush_input end
   loop do
     raw_string = receive_string
@@ -61,7 +85,6 @@ def serve
     sleep $interval
   end
 end
-
 
 at_exit do
   serve
