@@ -7,7 +7,6 @@ require 'shellwords'
 require 'i18n'
 
 $verbose = ARGV.member? '-v'
-$stdio   = ARGV.member? '-i'
 $pc = PC.instance
 
 I18n.config.available_locales = :en
@@ -15,6 +14,7 @@ I18n.config.available_locales = :en
 bauld 9600
 port_path '/dev/ttyACM*'
 port_path '/dev/ttyUSB*'
+timeout 5
 
 request 'HELLO' do
   'HELLO'
