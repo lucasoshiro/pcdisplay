@@ -36,17 +36,13 @@ void info_init () {
 }
 
 void parse (char *s) {
+    char command[32];
+    int i = 0;
     if (s == NULL) return;
-    char *s2 = (char *) malloc ((strlen (s) + 1) * sizeof (char));
-    strcpy (s2, s);
+    for (; s[i] != ' '; i++) command[i] = s[i];
+    command[i] = '\0';
 
-    char *p = strtok (s2, " ");
-    char *command = (char *) malloc ((strlen (p) + 1) * sizeof (char));
-    strcpy (command, p);
-
-    free (s2);
-
-    char *args = s + strlen (command) + 1;
+    char *args = s + i + 1;
 
     if      (CMM_CASE ("CPU"))     sscanf (args, "%d",           &INFO.cpu_usage);
     else if (CMM_CASE ("RAM"))     sscanf (args, "%ld%ld",       &INFO.ram_used, &INFO.ram_total);
@@ -57,8 +53,6 @@ void parse (char *s) {
     else if (CMM_CASE ("TEMP"))    sscanf (args, "%d",           &INFO.temp);
     else if (CMM_CASE ("SYSINFO")) unescape (INFO.sys_info, args);
     else if (CMM_CASE ("MEDIA"))   parse_media (args);
-
-    free (command);
 }
 
 static void parse_media (char *args) {
