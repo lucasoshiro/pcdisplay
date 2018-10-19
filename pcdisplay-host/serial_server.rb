@@ -1,30 +1,29 @@
 require_relative 'arduino_serial'
 require 'byebug'
+require 'timeout'
 
 $rules = {}
 $interval = 0.1
 $verbose = false
-$stdio = false
-$ports = []
+$port_paths = []
+$timeout = 4
 $arduino = nil
 $bauld = nil
-
-# begin
-#   $arduino = Arduino.new nil, nil
-# rescue Errno::ENOENT => e
-#   puts e
-# end
 
 def verbose v
   $verbose = v
 end
 
 def port_path port_str
-  $ports += Dir[port_str]
+  $port_paths << port_str
 end
 
 def bauld b
   $bauld = b
+end
+
+def timeout t
+  $timeout = t
 end
 
 def request request_name, &block
@@ -48,40 +47,53 @@ def parse_and_execute raw_string
 end
 
 def receive_string
-  s = $stdio ? $stdin.gets : $arduino.read_string
-  if $verbose then puts "RECEIVED #{s}" end
-  return s
+  Timeout.timeout $timeout do
+    s = $arduino.read_string
+    if $verbose then puts "RECEIVED #{s}" end
+    return s
+  end
 end
 
 def send_string s
-  $stdio ? $nstdout.puts(s) : $arduino.send_string(s)
-  if $verbose then puts "SENT #{s}" end
+  Timeout.timeout $timeout do
+    $arduino.send_string s
+    if $verbose then puts "SENT #{s}" end
+  end
 end
 
 def get_valid_arduino
-  if $bauld && $ports && $ports.length > 0
-    Arduino.new($ports.reject {|x| x.nil?}[0], $bauld)
+  ports = $port_paths.map{|path| Dir[path]}.reduce :+
+  if $bauld && ports && ports.length > 0
+    Arduino.new(ports.reject {|x| x.nil?}[0], $bauld)
   else
     nil
   end
 end
 
 def serve
-  $arduino = get_valid_arduino
-  if !$stdio then $arduino.flush_input end
   loop do
-    raw_string = receive_string
+    $arduino = get_valid_arduino
 
-    unless raw_string.nil?
-      response = parse_and_execute raw_string
+    if $arduino
+      loop do
+        begin
+          raw_string = receive_string
+          unless raw_string.nil?
+            response = parse_and_execute raw_string
 
-      if response.nil?
-        send_string 'NULL'
-      else
-        send_string response
+            if response.nil?
+              send_string 'NULL'
+            else
+              send_string response
+            end
+            sleep $interval
+          end
+        rescue Timeout::Error
+          break
+        end
       end
     end
-    
+      
     sleep $interval
   end
 end

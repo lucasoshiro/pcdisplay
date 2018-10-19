@@ -1,5 +1,5 @@
 require 'singleton'
-require_relative 'player'
+require_relative 'ruby-mpris2/lib/mpris2'
 
 class PC
   include Singleton
@@ -67,7 +67,7 @@ class PC
     nil
   end
 
-  def player_prev name
+n  def player_prev name
     @players[name].send_control :Previous
     nil
   end
