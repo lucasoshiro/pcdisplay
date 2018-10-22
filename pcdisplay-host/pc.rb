@@ -1,5 +1,5 @@
 require 'singleton'
-require_relative 'player'
+require_relative 'ruby-mpris2/lib/mpris2'
 
 class PC
   include Singleton
@@ -8,7 +8,8 @@ class PC
               :cpu_usage,
               :ram_info,
               :net_info,
-              :cpu_temperature
+              :cpu_temperature,
+              :media_metadata
 
   attr_writer :intervals
 
@@ -29,8 +30,8 @@ class PC
       refresh_volume: 10
     }
 
-    @players = {}
     @volume_mutex = Mutex.new
+    @media_metadata = nil
 
     auto_refresh
   end
@@ -53,29 +54,6 @@ class PC
     return sound_volume
   end
 
-  def active_players_name
-    @players.map {|name, _| name}
-  end
-
-  def player_play_pause name
-    @players[name].send_control :PlayPause
-    nil
-  end
-
-  def player_next name
-    @players[name].send_control :Next
-    nil
-  end
-
-  def player_prev name
-    @players[name].send_control :Previous
-    nil
-  end
-
-  def player_metadata name
-    @players[name].metadata
-  end
-
   private
 
   def auto_refresh
@@ -83,7 +61,7 @@ class PC
      :refresh_ram,
      :refresh_net,
      :refresh_cpu_temperature,
-    # :refresh_players
+    :refresh_players
     ].each do |refresh_method|
       self.send refresh_method
       Thread.new do
@@ -158,28 +136,20 @@ class PC
   end
 
   def refresh_players
-    puts 'M'
-    active_players_names = Player.active_players_names
-
-    puts 'active_players_names'
-    print active_players_names
-    puts ''
-
-    dead_players_names = @players.keys - active_players_names
-    new_players_names = active_players_names - @players.keys
-
-    dead_players_names.each do
-      |name|
-      @players[name].close
-      @players.delete[name]
+    first_player = MPRIS2.find_media_players.first
+    unless first_player
+      @media_metadata = nil
+      return
     end
 
-    new_players_names.each do
-      |name|
-      @players[name] = Player.new name
-    end
-
-    nil
+    metadata = first_player.metadata
+    
+    @media_metadata = {
+      track_number: metadata['xesam:trackNumber'],
+      title:        metadata['xesam:title'],
+      artist:       metadata['xesam:artist'] ? metadata['xesam:artist'][0] : metadata['xesam:albumArtist'],
+      album:        metadata['xesam:album']
+    }
   end
   
   def refresh_cpu_temperature

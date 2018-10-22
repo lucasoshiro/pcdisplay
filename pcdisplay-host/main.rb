@@ -1,10 +1,9 @@
 #!/usr/bin/env ruby
 
-require_relative 'pc'
-require_relative 'serial_server'
-
 require 'shellwords'
 require 'i18n'
+require_relative 'pc'
+require_relative 'serial_server'
 
 $verbose = ARGV.member? '-v'
 $pc = PC.instance
@@ -75,43 +74,18 @@ request 'SYSINFO' do
 end
 
 request 'MEDIA' do
-  nil
+  metadata = $pc.media_metadata
+  fix = ->(s) {Shellwords.escape(I18n.transliterate(s))}
+  if metadata
 
-  # DEPRECATED !!!
-  # if $pc.active_players_name.length == 0
-  #   nil
-  # else
-  #   # puts '$pc.active_players_name'
-  #   # print $pc.active_players_name
-  #   # puts ''
-  #   player = $pc.active_players_name[0]
-  #   metadata = $pc.player_metadata player
-
-  #   title  = Shellwords.escape(I18n.transliterate(metadata[:title] || ''))[0..63]
-  #   album  = Shellwords.escape(I18n.transliterate(metadata[:album] || ''))[0..63]
-  #   artist = Shellwords.escape(I18n.transliterate(metadata[:artist] || ''))[0..63]
-  #   track  = metadata[:track] || '0'
-    
-  #   "MEDIA #{title} #{album} #{artist} #{track}"
-  # end
-end
-
-request 'MEDIA_PLAY_PAUSE' do
-  player = $pc.active_players_name[0]
-  player and $pc.player_play_pause player
-  nil
-end
-
-request 'MEDIA_NEXT' do
-  player = $pc.active_players_name[0]
-  player and $pc.player_next player
-  nil
-end
-
-request 'MEDIA_PREV' do
-  player = $pc.active_players_name[0]
-  player and $pc.player_prev player
-  nil
+    track  = metadata[:track_number] || 0
+    title  = fix.(metadata[:title] || '""')
+    artist = fix.(metadata[:artist] || '""')
+    album  = fix.(metadata[:album] || '""')
+    "MEDIA #{title} #{album} #{artist} #{track}"
+  else
+    nil
+  end
 end
 
 puts 'ready'
