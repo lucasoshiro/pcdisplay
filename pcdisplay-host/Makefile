@@ -19,7 +19,7 @@ pcdisplay.service:
 	echo "Group=$(USER)" >> $@
 #	echo "WorkingDirectory=$(PWD)" >> $@
 	echo "Restart=on-failure" >> $@
-	echo "ExecStart=/usr/bin/env ruby $(PWD)/main.rb" >> $@
+	echo "ExecStart=/bin/bash -lc \"ruby $(PWD)/main.rb\"" >> $@
 
 	echo "" >> $@
 	echo "[Install]" >> $@
