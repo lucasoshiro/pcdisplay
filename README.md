@@ -4,7 +4,9 @@ README under construction...
 
 ### pcdisplay-guest
 
-This code runs on arduino
+This code runs on arduino.
+
+
 
 ### pcdiplay-host
 
