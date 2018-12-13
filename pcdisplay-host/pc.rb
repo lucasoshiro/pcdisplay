@@ -61,7 +61,7 @@ class PC
      :refresh_ram,
      :refresh_net,
      :refresh_cpu_temperature,
-#     :refresh_players
+     :refresh_players
     ].each do |refresh_method|
       self.send refresh_method
       Thread.new do
