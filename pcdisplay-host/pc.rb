@@ -61,7 +61,7 @@ class PC
      :refresh_ram,
      :refresh_net,
      :refresh_cpu_temperature,
-    :refresh_players
+#     :refresh_players
     ].each do |refresh_method|
       self.send refresh_method
       Thread.new do
@@ -92,7 +92,7 @@ class PC
     cpu_stat = `cat /proc/stat`.lines[0].split[1..-1].map {|v| v.to_f}
     new_total_cpu_time = cpu_stat.reduce(:+)
     new_total_cpu_usage = new_total_cpu_time - cpu_stat[3]
-    
+
     @cpu_usage =  (new_total_cpu_usage - old_total_cpu_usage) / (new_total_cpu_time - old_total_cpu_time)
     nil
   end
@@ -111,7 +111,7 @@ class PC
   def refresh_net
     dt = 1
     table = nil
-    
+
     file = File.new('/proc/net/dev', 'r')
     table = file.readlines[2..-1].map{|line| line.split[1..-1].map{|val| val.to_i}}
     file.close
@@ -143,7 +143,7 @@ class PC
     end
 
     metadata = first_player.metadata
-    
+
     @media_metadata = {
       track_number: metadata['xesam:trackNumber'],
       title:        metadata['xesam:title'],
@@ -151,7 +151,7 @@ class PC
       album:        metadata['xesam:album']
     }
   end
-  
+
   def refresh_cpu_temperature
     sensors_output = `sensors -u`
     temps = sensors_output.lines
