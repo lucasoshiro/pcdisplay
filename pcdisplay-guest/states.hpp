@@ -1,12 +1,13 @@
 #ifndef _STATES
 #define _STATES
+
 #include "lcd_util.hpp"
+#include "config.h"
 
-#define NUM_STATES 7
+#ifdef DISPLAY_TEXT_16_2
+enum state_t {SYSINFO, TIME, CPU, RAM, TEMP, NET, MEDIA, NUM_STATES};
 
-enum state_t {SYSINFO, TIME, CPU, RAM, TEMP, NET, MEDIA};
-
-extern void (*draw[7]) ();
+extern void (*draw[NUM_STATES]) ();
 
 void draw_sysinfo ();
 
@@ -21,4 +22,10 @@ void draw_temp ();
 void draw_net ();
 
 void draw_media ();
+
+#else
+enum state_t {NUM_STATES};
+extern void (*draw[NUM_STATES]) ();
+#endif
+
 #endif

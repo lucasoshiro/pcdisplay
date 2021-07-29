@@ -4,6 +4,7 @@
 #include <string.h>
 #include "states.hpp"
 #include "lcd_util.hpp"
+#include "config.h"
 
 char serial_buffer[256];
 state_t current_state;
@@ -68,24 +69,36 @@ void handle_responses () {
 void setup () {
     Serial.begin (9600);
     
+    #ifdef DISPLAY_TEXT_16_2
     lcd.createChar (0, charFilledBlock);
     lcd.createChar (1, charBeginEmptyBlock);
     lcd.createChar (2, charMidEmptyBlock);
     lcd.createChar (3, charEndEmptyBlock);
     lcd.createChar (4, charDegrees);
+    #endif
 
     pinMode (13, OUTPUT);
+
+    #ifdef DISPLAY_TEXT_16_2
     pinMode (2, INPUT);
 
     attachInterrupt (digitalPinToInterrupt (2), schedule_screen_change, RISING);
+    #endif
 
     digitalWrite (13, LOW);
+
+    #ifdef DISPLAY_TEXT_16_2
     lcd.begin (16, 2);
+    #endif
+
     delay (500);
     
+    #ifdef DISPLAY_TEXT_16_2
     lcd.setCursor (0, 0);
     lcd.print ("Starting...");
     lcd.setCursor (0, 0);
+    #endif
+
     info_init ();
     delay (500);
 }
@@ -126,8 +139,12 @@ void main_loop () {
 void loop () {
     before ();
     main_loop ();
+
+    #ifdef DISPLAY_TEXT_16_2
     lcd.clear ();
     lcd.setCursor (0, 0);
     lcd.print ("Connection lost");
+    #endif
+
     delay (1000);
 }

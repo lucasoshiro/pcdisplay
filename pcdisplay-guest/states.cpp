@@ -1,19 +1,27 @@
 #include "states.hpp"
+#include "config.h"
 #include "info.hpp"
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
 
+
 static int log2 (unsigned long n);
 
-void (*draw[7]) () = {draw_sysinfo,
-                      draw_time,
-                      draw_cpu,
-                      draw_ram,
-                      draw_temp,
-                      draw_net,
-                      draw_media};
+void (*draw[NUM_STATES]) () =
+{
+#ifdef DISPLAY_TEXT_16_2
+    draw_sysinfo,
+    draw_time,
+    draw_cpu,
+    draw_ram,
+    draw_temp,
+    draw_net,
+    draw_media
+#endif
+};
 
+#ifdef DISPLAY_TEXT_16_2
 void draw_sysinfo () {
     lcd.setCursor (0, 0);
     lcd.print (INFO.computer_name);
@@ -129,6 +137,7 @@ void draw_media () {
     a.print ();
     delete[] line;
 }
+#endif
 
 static int log2 (unsigned long n) {
     int l;

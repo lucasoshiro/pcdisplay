@@ -2,6 +2,7 @@
 #include <math.h>
 #include <string.h>
 
+#ifdef DISPLAY_TEXT_16_2
 LiquidCrystal lcd (12, 11, 6, 5, 4, 3);
 
 void printCenter (int l, char *s) {
@@ -35,6 +36,8 @@ void clear_line_section (int line, int index, int end) {
     for (int i = index; i < end; i++) lcd.write (' ');
 }
 
+#endif
+
 RotatingLine::RotatingLine (char *s, int line) {
     this->len = strlen (s);
     this->s = new char[this->len + 1];
@@ -54,18 +57,28 @@ void RotatingLine::print () {
     this->skip_count = (this->skip_count + 1) % ROTATING_SKIP;
     if (this->skip_count != 0) return;
     
+    #ifdef DISPLAY_TEXT_16_2
     lcd.setCursor (0, this->line);
+    #endif
 
     if (this->len < 16) {
+        #ifdef DISPLAY_TEXT_16_2
         lcd.print (this->s);
         clear_line_section (this->line, this->len, 16);
+        #endif
         return;
     }
 
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 16; i++) {
+        #ifdef DISPLAY_TEXT_16_2
         lcd.write (this->s[(this->first + i) % this->len]);
+        #endif
+    }
     
+    #ifdef DISPLAY_TEXT_16_2
     clear_line_section (this->line, i, 17);
+    #endif
+
     this->first = (this->first + 1) % this->len;
 }
 
