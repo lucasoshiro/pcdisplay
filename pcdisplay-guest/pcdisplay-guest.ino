@@ -1,5 +1,5 @@
 #include "info.hpp"
-#include "specialCharacters.hpp"
+#include "bitmap.hpp"
 #include <LiquidCrystal.h>
 #include <string.h>
 #include "states.hpp"
