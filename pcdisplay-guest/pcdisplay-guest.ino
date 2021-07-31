@@ -77,6 +77,10 @@ void setup () {
     lcd.createChar (4, charDegrees);
     #endif
 
+    #ifdef DISPLAY_GRAPHIC_128_64
+    u8g.setColorIndex(1);
+    #endif
+
     pinMode (13, OUTPUT);
 
     #ifdef DISPLAY_TEXT_16_2

@@ -19,6 +19,14 @@ void draw_percent (int line, int percent);
 void clear_line_section (int line, int begin, int end);
 #endif
 
+#ifdef DISPLAY_GRAPHIC_128_64
+#include <U8glib.h>
+extern U8GLIB_ST7920_128X64_1X u8g;
+
+void drawPercent (int i, int j, int perc);
+
+#endif
+
 class RotatingLine {
 public:
     RotatingLine (char* s, int line);

@@ -23,9 +23,14 @@ void draw_net ();
 
 void draw_media ();
 
-#else
-enum state_t {NUM_STATES};
+#endif
+
+#ifdef DISPLAY_GRAPHIC_128_64
+enum state_t {ALL_INFO, NUM_STATES};
+
 extern void (*draw[NUM_STATES]) ();
+
+void draw_info ();
 #endif
 
 #endif
