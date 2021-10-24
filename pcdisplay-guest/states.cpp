@@ -218,19 +218,22 @@ static void draw_media () {
     // u8g.drawBox (6, 40, 40, 3);
 
     // Track
-    line = new char[strlen (INFO.media_title) + 10];
+    line = new char[strlen (INFO.media_title) + 24];
     if (INFO.media_track > 0)
         sprintf (line, "%d - %s  ", INFO.media_track, INFO.media_title);
     else
         sprintf (line, "%s  ", INFO.media_title);
 
+    line[24] = '\0';
     u8g.drawStr (1, 46, line);
     delete[] line;
 
     // Artist
-    line = new char[strlen (INFO.media_artist) + 10];
+    line = new char[strlen (INFO.media_artist) + 24];
     sprintf (line, "%s  ", INFO.media_artist);
 
+    // Prevent overflow
+    line[24] = '\0';
     u8g.drawStr (1, 55, line);
     delete[] line;
 }
