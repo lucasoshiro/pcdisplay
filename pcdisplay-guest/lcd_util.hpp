@@ -7,7 +7,7 @@
 #include <LiquidCrystal.h>
 #endif
 
-#define ROTATING_SKIP 4
+#define ROTATING_SKIP 2
 
 #ifdef DISPLAY_TEXT_16_2
 extern LiquidCrystal lcd;
@@ -29,17 +29,44 @@ void drawPercent (int i, int j, int perc);
 
 class RotatingLine {
 public:
-    RotatingLine (char* s, int line);
+
+#ifdef DISPLAY_TEXT_16_2
+    RotatingLine (
+        char* s,
+        int line
+);
+#endif
+
+
+#ifdef DISPLAY_GRAPHIC_128_64
+    RotatingLine (
+        char* s,
+        u8g_uint_t x,
+        u8g_uint_t y
+);
+#endif
+
+
     ~RotatingLine ();
     void print ();
     int same_str (char *s);
     void reset (char *s);
+    void update();
+
 private:
     char *s;
+
+#ifdef DISPLAY_TEXT_16_2
     int line;
+#endif
+
+#ifdef DISPLAY_GRAPHIC_128_64
+    u8g_uint_t x;
+    u8g_uint_t y;
+#endif
+
     int first;
     int len;
     int skip_count;
 };
-
 #endif

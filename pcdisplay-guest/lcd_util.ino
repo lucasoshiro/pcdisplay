@@ -14,7 +14,7 @@ void printCenter (int l, char *s) {
 
 void draw_percent (int line, int percent) {
     int fill = round (percent * 16. / 100.);
-    
+
     lcd.setCursor (0, line);
     for (int i = 0; i < fill; i++) lcd.write (byte (0));
 
@@ -51,14 +51,49 @@ void drawPercent (int i, int j, int perc) {
 }
 #endif
 
-RotatingLine::RotatingLine (char *s, int line) {
+#ifdef DISPLAY_TEXT_16_2
+#define ROTATING_MAX_LENGTH 16
+#endif
+
+#ifdef DISPLAY_GRAPHIC_128_64
+#define ROTATING_MAX_LENGTH 21
+#endif
+
+#ifdef DISPLAY_TEXT_16_2
+RotatingLine::RotatingLine (
+    char *s,
+    int line
+    ) {
+
     this->len = strlen (s);
     this->s = new char[this->len + 1];
     strcpy (this->s, s);
+
     this->line = line;
-    this->first = 0;
+    this->first = -1;
     this->skip_count = -1;
 }
+#endif
+
+
+#ifdef DISPLAY_GRAPHIC_128_64
+RotatingLine::RotatingLine (
+    char *s,
+    u8g_uint_t x,
+    u8g_uint_t y
+    ) {
+    this->len = strlen (s);
+    this->s = new char[this->len + 1];
+    strcpy (this->s, s);
+
+    this->x = x;
+    this->y = y;
+
+    this->first = 0;
+    this->skip_count = 0;
+}
+#endif
+
 
 RotatingLine::~RotatingLine () {
     delete[] this->s;
@@ -67,32 +102,58 @@ RotatingLine::~RotatingLine () {
 void RotatingLine::print () {
     int i;
 
-    this->skip_count = (this->skip_count + 1) % ROTATING_SKIP;
+#ifdef DISPLAY_TEXT_16_2
+    this->update();
     if (this->skip_count != 0) return;
-    
-    #ifdef DISPLAY_TEXT_16_2
-    lcd.setCursor (0, this->line);
-    #endif
 
-    if (this->len < 16) {
-        #ifdef DISPLAY_TEXT_16_2
+    lcd.setCursor (0, this->line);
+#endif
+
+    if (this->len <= ROTATING_MAX_LENGTH) {
+
+#ifdef DISPLAY_TEXT_16_2
         lcd.print (this->s);
         clear_line_section (this->line, this->len, 16);
-        #endif
+#endif
+
+#ifdef DISPLAY_GRAPHIC_128_64
+        u8g.drawStr (this->x, this->y, this->s);
+#endif
         return;
     }
 
+#ifdef DISPLAY_TEXT_16_2
     for (i = 0; i < 16; i++) {
-        #ifdef DISPLAY_TEXT_16_2
         lcd.write (this->s[(this->first + i) % this->len]);
-        #endif
     }
-    
-    #ifdef DISPLAY_TEXT_16_2
-    clear_line_section (this->line, i, 17);
-    #endif
 
-    this->first = (this->first + 1) % this->len;
+    clear_line_section (this->line, i, 17);
+#endif
+
+#ifdef DISPLAY_GRAPHIC_128_64
+    {
+        char *s_tmp = new char[this->len * 2 + 4];
+        strcpy(s_tmp, this->s);
+        strcat(s_tmp, "  ");
+        strcat(s_tmp, this->s);
+
+        if (this->first + ROTATING_MAX_LENGTH < this->len * 2 + 4)
+            s_tmp[this->first + ROTATING_MAX_LENGTH] = '\0';
+
+        u8g.drawStr (this->x, this->y, s_tmp + this->first);
+        delete[] s_tmp;
+    }
+#endif
+}
+
+void RotatingLine::update() {
+    this->skip_count++;
+    this->skip_count %= ROTATING_SKIP;
+
+    if (this->skip_count == 0) {
+        this->first++;
+        this->first %= this->len;
+    }
 }
 
 int RotatingLine::same_str (char *s) {
@@ -104,6 +165,6 @@ void RotatingLine::reset (char *s) {
     delete[] this->s;
     this->s = new char[this->len + 1];
     strcpy (this->s, s);
-    this->first = 0;
+    this->first = -1;
     this->skip_count = -1;
 }

@@ -153,6 +153,11 @@ void draw_media () {
 #endif
 
 #ifdef DISPLAY_GRAPHIC_128_64
+
+RotatingLine rl1 ("", 1, 46);
+RotatingLine rl2 ("", 1, 55);
+
+
 static void draw_cpu () {
     char bff[32];
 
@@ -212,11 +217,6 @@ static void draw_net () {
 static void draw_media () {
     char *line;
 
-    // Time
-    // u8g.drawBitmapP (0, 37, 1, 8, play);
-    // u8g.drawFrame (6, 40, 120, 3);
-    // u8g.drawBox (6, 40, 40, 3);
-
     // Track
     line = new char[strlen (INFO.media_title) + 24];
     if (INFO.media_track > 0)
@@ -224,17 +224,16 @@ static void draw_media () {
     else
         sprintf (line, "%s  ", INFO.media_title);
 
-    line[24] = '\0';
-    u8g.drawStr (1, 46, line);
+    if (!rl1.same_str (line)) rl1.reset(line);
+    rl1.print();
     delete[] line;
 
     // Artist
     line = new char[strlen (INFO.media_artist) + 24];
     sprintf (line, "%s  ", INFO.media_artist);
 
-    // Prevent overflow
-    line[24] = '\0';
-    u8g.drawStr (1, 55, line);
+    if (!rl2.same_str (line)) rl2.reset(line);
+    rl2.print();
     delete[] line;
 }
 
@@ -253,6 +252,8 @@ static void draw_info_callback () {
 
 void draw_info () {
     u8g.firstPage ();
+    rl1.update();
+    rl2.update();
     do { draw_info_callback (); } while (u8g.nextPage ());
 }
 #endif
